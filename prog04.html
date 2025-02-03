@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Change Buttons</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            margin-top: 50px;
+        }
+        .button {
+            background-color: black;
+            color: white;
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<div id="navbar"></div>
+<script>document.addEventListener('DOMContentLoaded', () => {
+ fetch('navBar.html')
+     .then(response => response.text())
+     .then(data => {
+         document.getElementById('navbar').innerHTML = data;
+     });
+});</script>
+<body>
+    
+    <button class="button" id="redBtn">RED</button>
+    <button class="button" id="greenBtn">GREEN</button>
+    <button class="button" id="blueBtn">BLUE</button>
+    
+    <div id="counters">
+        <p>RED count: <span id="redCount">0</span></p>
+        <p>GREEN count: <span id="greenCount">0</span></p>
+        <p>BLUE count: <span id="blueCount">0</span></p>
+    </div>
+    
+    <script>
+        let redCount = 0, greenCount = 0, blueCount = 0
+
+        function changeColor(color) {
+            document.body.style.backgroundColor = color;
+            if (color === 'red') document.getElementById('redCount').textContent = ++redCount;
+            if (color === 'green') document.getElementById('greenCount').textContent = ++greenCount;
+            if (color === 'blue') document.getElementById('blueCount').textContent = ++blueCount;
+        }
+
+        document.getElementById('redBtn').addEventListener('click', () => changeColor('red'));
+        document.getElementById('greenBtn').addEventListener('click', () => changeColor('green'));
+        document.getElementById('blueBtn').addEventListener('click', () => changeColor('blue'));
+
+        document.querySelectorAll('.button').forEach(button => {
+            button.addEventListener('mouseout', function() {
+                this.style.backgroundColor = 'black';
+                this.style.color = 'white';
+            });
+        });
+    </script>
+</body>
+</html>
